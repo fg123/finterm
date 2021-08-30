@@ -22,7 +22,7 @@ class Token {
 };
 
 function IsAlpha(char) {
-    return (char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z');
+    return char == '_' || (char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z');
 }
 
 function IsDigit(char) {

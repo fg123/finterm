@@ -2,6 +2,9 @@ const inputField = $("input.input_line");
 
 const state = new State();
 
+const history = [""];
+let current_prompt = 0;
+
 inputField.keypress((e) => {
     if (e.which === 13) {
         // Make a new fake input field
@@ -16,5 +19,22 @@ inputField.keypress((e) => {
         catch (e) {
             console.error(e);
         }
+        history[history.length - 1] = inputField.val();
+        history.push("");
+        current_prompt = history.length - 1;
     }
+    else if (e.which === 38) {
+    	// Up Arrow
+    	if (current_prompt > 0) current_prompt -= 1;
+    	inputField.val(history[current_prompt]);
+    }
+    else if (e.which === 40) {
+    	if (current_prompt < history.length - 1) current_prompt += 1;
+    	inputField.val(history[current_prompt]);
+    }
+    else {
+    	history[current_prompt] = inputField.val();
+    }
+
+    console.log(history);
 });
